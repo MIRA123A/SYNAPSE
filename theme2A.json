@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "question": "Question 1: What is the main function of the cell membrane?",
+        "propositions": [
+            "A. To provide energy to the cell",
+            "B. To control what enters and exits the cell",
+            "C. To store genetic material",
+            "D. To synthesize proteins"
+        ],
+        "correct_answers": [1],
+        "cours" : 1
+    },
+    {
+        "id": 2,
+        "question": "Question 2: Which of the following is NOT a type of tissue?",
+        "propositions": [
+            "A. Connective tissue",
+            "B. Epithelial tissue",
+            "C. Skeletal tissue",
+            "D. Muscular tissue"
+        ],
+        "correct_answers": [2],
+          "cours" : 2
+    },
+   {
+        "id": 3,
+        "question": "Question 3: What is the process by which cells obtain energy from glucose?",
+       "propositions": [
+            "A. Photosynthesis",
+            "B. Cellular respiration",
+            "C. Diffusion",
+            "D. Osmosis"
+        ],
+        "correct_answers": [1],
+           "cours" : 1
+    },
+    {
+        "id": 4,
+        "question": "Question 4: Which organelle is responsible for protein synthesis?",
+        "propositions": [
+            "A. Mitochondria",
+            "B. Endoplasmic reticulum",
+            "C. Golgi apparatus",
+            "D. Ribosome"
+        ],
+        "correct_answers": [3],
+          "cours" : 2
+    }
+]

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+      <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+             display: flex;
+           flex-direction: column;
+         align-items: center;
+         text-align: center;
+       }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+         th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+             text-align: left;
+        }
+       th {
+          background-color: #f2f2f2;
+       }
+
+         button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+             margin: 10px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #367c39;
+        }
+        .error {
+         color : red;
+        }
+          .session-count {
+             font-weight: bold;
+              color : #333;
+          }
+          .user-online{
+             color : green;
+          }
+          .user-offline{
+             color : grey;
+         }
+
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <p>Bienvenue, Administrateur.</p>
+      {% if error %}
+            <p class = "error">{{ error }}</p>
+        {% endif %}
+   <a href="{{ url_for('add_member') }}"><button>Ajouter Membre</button></a>
+        <form method="get" style = "margin-top: 10px">
+            <input type="text" name="search" placeholder="Rechercher par nom ou email" value = "{{ search_term }}" style = "margin-bottom: 10px">
+            <button type="submit">Rechercher</button>
+        </form>
+
+    <h2>Liste des Membres</h2>
+     <table>
+        <thead>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                  <th>Statut</th>
+                <th>Sessions</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for username, data in members.items() %}
+             <tr>
+                <td>{{ username }}</td>
+                 <td>{{ data.get('email', 'N/A') }}</td>
+                <td>
+                     {% if logged_in_users.get(username) %}
+                      <span class="user-online">Connecté</span>
+                   {% else %}
+                      <span class="user-offline">Déconnecté</span>
+                    {% endif %}
+                 </td>
+                 <td class="session-count">
+                   {{ logged_in_users.get(username, 0) }}
+                 </td>
+                  <td>
+                      {% if username not in ['admin'] %}
+                          <a href="{{ url_for('delete_member', username=username) }}">
+                            <button>Supprimer</button>
+                          </a>
+                           <a href="{{ url_for('edit_member', username=username) }}">
+                            <button>Modifier</button>
+                           </a>
+                      {% endif %}
+                   </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+      <a href="{{ url_for('index') }}"><button >Retour à la page d'acceuil</button></a>
+</body>
+</html>
