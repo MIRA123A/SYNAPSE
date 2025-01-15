@@ -30,6 +30,35 @@
               width : 100%;
               box-sizing: border-box;
          }
+           select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: white; /* White background */
+            border: 1px solid #ccc; /* Thin border */
+            border-radius: 8px; /* Rounded corners */
+            padding: 10px;
+             margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+             background-position: right 10px center;
+            background-size : 1.2em;
+              padding-right : 30px;
+              transition: border-color 0.3s ease; /* smooth transition on hover */
+
+         }
+        select:focus {
+            outline: none;
+           border-color : #4CAF50;
+        }
+          select::-ms-expand { /* For IE and Edge */
+             display: none;
+         }
          button {
             padding: 12px 20px;
             background-color: #4CAF50;

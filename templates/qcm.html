@@ -1,10 +1,9 @@
-<!-- qcm.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>QCM {{ current_qcm_index + 1 }}</title>
-<style>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 20px;
@@ -13,10 +12,10 @@
         }
         .progress-container {
            width: 100%;
-             background-color: #ddd;
+             background-color: #fff;
              border-radius: 5px;
             margin-bottom: 10px;
-            height: 25px;
+           height : 30px;  /* Increased height */
               position: relative;
              display: flex;
 			               align-items: center;
@@ -25,7 +24,7 @@
         }
 
         .progress-bar {
-            height: 10px;
+            height: 18px;  /* Increased bar height */
             background-color: #4CAF50;
             border-radius: 5px;
             transition: width 0.3s ease;
@@ -44,6 +43,9 @@
          white-space: nowrap;
          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
        }
+       .progress-text span{
+            font-size : 0.9rem
+          }
 	   .modern-button {
   display: inline-flex;
   align-items: center;
@@ -218,33 +220,27 @@
               margin-left : 10px;
             font-size : 10px;
           }
-          .disabled-button {
+           .disabled-button {
               background-color: #ffaaaa;
               cursor: not-allowed;
                pointer-events: none; /* Empêche les clics */
 
            }
-    </style></head>
+    </style>
+</head>
 <body>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar" style="width: {{ (current_qcm_index / total_qcms * 100) | round(0) }}%;">
         </div>
          <div class="progress-text">
-             Votre pourcentage des QCMs totalement justes est: {{ global_success_rate | round(2) }}%
+             Votre pourcentage des QCMs totalement justes est: {{ global_success_rate[0] | round(2) }}% (<span>{{ global_success_rate[1] }}/{{ global_success_rate[2] }} QCMs</span>)
          </div>
     </div>
     <div class="timer">
         <span id="timer-display">00:00</span>
         <button  id="stop-btn" class="pause-btn">Pause</button>
     </div>
-   
-    <h1>{{ qcm.question }}</h1>
-       {% if matiere %}
-        <div>Thème actuel: <span>{{ matiere }}</span></div>
-        {% endif %}
-       {% if cours %}
-        <div>Cours actuel: <span>{{ cours }}</span></div>
-        {% endif %}
+    <h1>QCM {{ current_qcm_index + 1 }}/{{ total_qcms }}: {{ qcm.question }}</h1>
     <form method="post">
         <input type="hidden" name="time_at_valide" id="time_at_valide" value="">
           {% for i, option in propositions_enumerate %}
@@ -310,7 +306,7 @@
          pauseButton.classList.add('paused')
              pauseButton.innerText = "Resume";
          }
-         else{
+        else{
          pauseButton.innerText = "Pause";
           }
 
