@@ -1,0 +1,235 @@
+[
+    {
+        "id": 1,
+        "question": "[SESSION JANVIER 2024]: La coloration de Gram:",
+        "propositions": [
+            "A- Est adaptée à toutes les bactéries.",
+            "B- Permet la distinction des bactéries en fonction de leurs membranes cytoplasmique.",
+            "C- Aide à l’identification bactérienne.",
+            "D- Guide le traitement aux antibiotiques.",
+            "E- Met en évidence le caractère alcoolo-résistant des bactéries."
+        ],
+        "correct_answers": [2],
+        "cours": 1
+    },
+    {
+        "id": 2,
+        "question": "[SESSION JANVIER 2024]: Les exotoxines:",
+        "propositions": [
+            "A- Sont produites uniquement par les bactéries Gram (+).",
+            "B- Peuvent être responsable d’un état de choc septique.",
+            "C- Sont de nature protéique.",
+            "D- Permettent l’adhésion aux cellules de l’hôte.",
+            "E- Peuvent être transformées en anatoxine."
+        ],
+        "correct_answers": [2, 3, 4],
+        "cours": 1
+    },
+    {
+        "id": 3,
+        "question": "[SESSION JANVIER 2024]: Le biofilm:",
+        "propositions": [
+            "A- Peut être responsable d’un choc septique.",
+            "B- Assure l’invasion de la cellule hôte.",
+            "C- Constitue une barrière contre la diffusion des antibiotiques.",
+            "D- Permet la conjugaison bactérienne.",
+            "E- Permet l’adhésion des bactéries aux cellules et aux biomatériaux."
+        ],
+        "correct_answers": [3, 4, 5],
+        "cours": 1
+    },
+    {
+        "id": 4,
+        "question": "[SESSION JANVIER 2024]: La phagothérapie:",
+        "propositions": [
+            "A- Nécessite l’intervention d’un phage lytique.",
+            "B- Nécessite l’identification préalable de la bactérie responsable de l’infection.",
+            "C- Est un outil thérapeutique fréquemment utilisé en routine.",
+            "D- Peut être utilisé dans le traitement d’infection virale.",
+            "E- Peut être indiquée en cas de multirésistance bactérienne aux antibiotiques."
+        ],
+        "correct_answers": [2, 5],
+        "cours": 1
+    },
+    {
+        "id": 5,
+        "question": "[SESSION JANVIER 2024]: Parmi les propriétés d’une bactérie lysogène:",
+        "propositions": [
+            "A- L’immunité.",
+            "B- La compétence.",
+            "C- L’induction.",
+            "D- La lyse bactérienne.",
+            "E- La conversion lysogénique."
+        ],
+        "correct_answers": [1, 2, 5],
+        "cours": 1
+    },
+    {
+        "id": 6,
+        "question": "[SESSION JANVIER 2024]: La technique PCR en vue d’un diagnostic virologique:",
+        "propositions": [
+            "A- Est réservée au laboratoire de recherche.",
+            "B- Nécessite un acheminement rapide du prélèvement au laboratoire.",
+            "C- Nécessite une étape d’extraction de l’acide nucléique.",
+            "D- Nécessite une étape de rétro-transcription pour les virus à ADN.",
+            "E- Peut quantifier le génome viral en cas de PCR en temps réel."
+        ],
+        "correct_answers": [2, 3, 5],
+        "cours": 1
+    },
+    {
+        "id": 7,
+        "question": "[SESSION JANVIER 2024]: La transduction bactérienne:",
+        "propositions": [
+            "A- Permet l’intégration dans la cellule de l’ADN libre du milieu.",
+            "B- Nécessite l’intervention des pili sexuels.",
+            "C- Est assuré par les phages.",
+            "D- Peut permettre l’acquisition de facteurs de virulence par la bactérie.",
+            "E- Nécessite une bactérie en état de compétence."
+        ],
+        "correct_answers": [1, 3, 4],
+        "cours": 1
+    },
+    {
+        "id": 8,
+        "question": "[SESSION JANVIER 2024]: Au cours d’un croisement entre une bactérie F (+) et une bactérie F (-) :",
+        "propositions": [
+            "A- Le transfert du facteur F se fait à haute fréquence.",
+            "B- Le facteur F est autonome dans la bactérie F (+).",
+            "C- Le transfert se fait à sens unique.",
+            "D- Le facteur F s’intègre au chromosome de la bactérie F (-).",
+            "E- La bactérie qui a acquis le facteur F devient HFR (haute fréquence de recombinaison)."
+        ],
+        "correct_answers": [1, 2, 3],
+        "cours": 1
+    },
+    {
+        "id": 9,
+        "question": "[SESSION JANVIER 2024]: L’oxyure est un (e):",
+        "propositions": [
+            "A- Parasite appartient au règne animal.",
+            "B- Protozoaire.",
+            "C- Nématode.",
+            "D- Insecte.",
+            "E- Acarien."
+        ],
+        "correct_answers": [3],
+        "cours": 1
+    },
+    {
+        "id": 10,
+        "question": "[SESSION JANVIER 2024]: La prophylaxie individuelle des maladies parasitaires repose sur:",
+        "propositions": [
+            "A- Le lavage des mains.",
+            "B- La vaccination.",
+            "C- L’éducation sanitaire.",
+            "D- La lutte contre les animaux sauvages.",
+            "E- Les mesures hygiéno-diététiques."
+        ],
+        "correct_answers": [1, 3, 5],
+        "cours": 1
+    },
+    {
+        "id": 11,
+        "question": "[SESSION JANVIER 2024]: Les protozoaires:",
+        "propositions": [
+            "A- Sont des êtres unicellulaires.",
+            "B- Sont classés selon leur mode de déplacement.",
+            "C- Comportent des sporozoaires, des flagellés et des arthropodes.",
+            "D- Appartiennent au règne fongique.",
+            "E- Peuvent se présenter sous forme végétative et ou kystique."
+        ],
+        "correct_answers": [1, 2],
+        "cours": 1
+    },
+    {
+        "id": 12,
+        "question": "[SESSION JANVIER 2024]: Les toxi-infections alimentaires par les salmonella non typhique:",
+        "propositions": [
+            "A- Sont fréquentes.",
+            "B- Ont un taux de mortalité élevé.",
+            "C- Ont une durée d’incubation de 2 à 4 heures.",
+            "D- Sont traitées par des antibiotiques chez tous les patients.",
+            "E- Ont comme principal mécanisme physiopathologique la prolifération."
+        ],
+        "correct_answers": [1, 2, 5],
+        "cours": 1
+    },
+    {
+        "id": 13,
+        "question": "[SESSION JANVIER 2024]: Concernant la TIAC:",
+        "propositions": [
+            "A- Le mécanisme physiologique d’une toxi-infection alimentaire collective par le thon est la toxinogenèse.",
+            "B- Les toxi-infections alimentaires collectives du Clostridium botulinum peuvent entraîner des paralysies gravissimes.",
+            "C- La shigellose touche préférentiellement les adultes.",
+            "D- La contamination des aliments par le S. Aureus se fait lors de la préparation par un porteur sain ou présentant une plaie infectée.",
+            "E- Les TIAC par le S. Aureus sont installées brutalement."
+        ],
+        "correct_answers": [1, 2, 3, 4, 5],
+        "cours": 1
+    },
+    {
+        "id": 14,
+        "question": "[SESSION JANVIER 2024]: Les principaux agents infectieux des intoxications alimentaires sont:",
+        "propositions": [
+            "A- Clostridium perfringens.",
+            "B- Clostridium botulinum.",
+            "C- Staphylococcus aureus.",
+            "D- Salmonella non typhi.",
+            "E- Listeria monocytogenes."
+        ],
+        "correct_answers": [1, 2, 3, 4, 5],
+        "cours": 1
+    },
+    {
+        "id": 15,
+        "question": "[SESSION JANVIER 2024]: Les signes qui ne font pas partie de ceux générés par les insecticides organophosphorés sont:",
+        "propositions": [
+            "A- Douleur abdominale.",
+            "B- Révulsion oculaire.",
+            "C- Convulsion.",
+            "D- Hypersialorrhée.",
+            "E- Paralysie musculaire."
+        ],
+        "correct_answers": [1],
+        "cours": 1
+    },
+    {
+        "id": 16,
+        "question": "[SESSION JANVIER 2024]: L’intoxication par le CO:",
+        "propositions": [
+            "A- Est évoquée face à un patient comateux dans un espace confiné.",
+            "B- N’est pas mortelle.",
+            "C- Peut être prévenue par l’entretien des appareils de chauffage.",
+            "D- Peut nécessiter une assistance respiratoire.",
+            "E- Est dangereuse car le CO est incolore et inodore."
+        ],
+        "correct_answers": [1, 3, 4, 5],
+        "cours": 1
+    },
+    {
+        "id": 17,
+        "question": "[SESSION JANVIER 2024]: L’intoxication au paracétamol:",
+        "propositions": [
+            "A- Est le plus volontaire.",
+            "B- Entraîne essentiellement une toxicité rénale.",
+            "C- Est responsable d’une lyse des cellules hépatiques.",
+            "D- A comme antidote de choix le N-acétylcystéine.",
+            "E- Ne touche que les enfants de moins de 5 ans."
+        ],
+        "correct_answers": [3, 4],
+        "cours": 1
+    },
+    {
+        "id": 18,
+        "question": "[SESSION JANVIER 2024]: L’agressivité est:",
+        "propositions": [
+            "A- Connue comme un comportement instinctif.",
+            "B- Gérée par le système limbique.",
+            "C- Contrôlée par le cortex temporal.",
+            "D- Innée, non influencée par l’environnement."
+        ],
+        "correct_answers": [2],
+        "cours": 1
+    }
+]
