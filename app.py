@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template, request, redirect, url_for, session
 import time
 import json
@@ -9,7 +10,6 @@ import string
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from collections import defaultdict
-from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -18,11 +18,11 @@ DATA_FILE = 'members_data.json'
 RESPONSES_DIR = 'responses'
 
 # Email settings
-smtp_server = 'smtp.gmail.com'
+smtp_server = 'in-v3.mailjet.com'
 smtp_port = 587
-sender_email = "ousamamechergui@gmail.com"
-sender_password = "cgvx qtts radw vmqh"  
-
+sender_email = "9ebdc63aba0d5a49d1c999cefbe62a05"  # Remplacez par votre clé API Mailjet
+sender_password = "673e979fa618cf465ada087a98718afb" # Remplacez par votre clé secrète API Mailjet
+sender_email_real = "synapsemohamed@gmail.com" # Remplacez par votre adresse email vérifiée sur Mailjet
 
 class QCM:
     def __init__(self, id, question, propositions, correct_answers, user_answers=None, results=None, done=False, time_elapsed=0, cours=1):
@@ -117,7 +117,9 @@ def load_members_data():
                 if 'level' not in data:
                      print(f"Adding default level 'PCEM1' for user: {username}")
                      data['level'] = "PCEM1"
-                     
+                if 'registration_date' not in data:
+                     print(f"Adding default registration date for user: {username}")
+                     data['registration_date'] = datetime.datetime.now().strftime('%d/%m/%Y')  # Changed here
             return members
     else:
          return {}
@@ -135,7 +137,7 @@ def generate_confirmation_code():
 def send_confirmation_email(email, username, code, level):
     message = MIMEMultipart("alternative")
     message["Subject"] = "Confirmation d'inscription"
-    message["From"] = sender_email
+    message["From"] = sender_email_real # Use sender_email_real here
     message["To"] = email
     
     html = f"""
@@ -156,8 +158,8 @@ def send_confirmation_email(email, username, code, level):
     context = ssl.create_default_context()
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls(context=context)
-        server.login(sender_email, sender_password)
-        server.sendmail(sender_email, email, message.as_string())
+        server.login(sender_email, sender_password) # Use sender_email and sender_password for authentication
+        server.sendmail(sender_email_real, email, message.as_string())
 
 def save_user_response(username, matiere, qcm_id, user_answers, elapsed_time, cours):
     
@@ -227,7 +229,7 @@ def register():
            return render_template('login.html', register_error="Ce nom d'utilisateur existe déjà.")
          
          confirmation_code = generate_confirmation_code()
-         MEMBERS[username] = {'password': password, 'email': email, 'is_active': False, 'confirmation_code': confirmation_code, 'level' : level, 'certificats':{}}
+         MEMBERS[username] = {'password': password, 'email': email, 'is_active': False, 'confirmation_code': confirmation_code, 'level' : level, 'certificats':{}, 'registration_date': datetime.datetime.now().strftime('%d/%m/%Y')} #setting registration date
         
          with open('module_structure.json', 'r', encoding='utf-8') as f:
            modules = json.load(f)
@@ -398,7 +400,7 @@ def update_average_scores():
 
 def calculate_global_success_rate(qcms):
     if not qcms:
-        return 0.0  # Avoid division by zero
+        return 0.0, 0, 0  # Avoid division by zero
 
     total_correct = 0
     total_questions = 0
@@ -409,7 +411,7 @@ def calculate_global_success_rate(qcms):
             if correct_count == len(qcm.correct_answers):
               total_correct += 1
             total_questions += 1
-    return (total_correct / total_questions) * 100 if total_questions > 0 else 0
+    return (total_correct / total_questions) * 100 if total_questions > 0 else 0, total_correct, total_questions
 def get_user_rank(matiere, level = None):
     if 'username' not in session:
         print("Error: Username not found in session for get_user_rank.")
@@ -745,9 +747,9 @@ def admin_login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == 'admin' and password == 'admin':
+        if username == 'admin' and password == 'Amourocma123': # Changed password here
             session['admin_logged_in'] = True
-            return redirect(url_for('admin'))
+            return redirect(url_for('admin_dashboard'))
         else:
              error = "Identifiants incorrects"
     return render_template('admin_login.html', error = error)
@@ -755,22 +757,52 @@ def admin_login():
 def is_admin_logged_in():
     return session.get('admin_logged_in', False)
 
-@app.route('/admin')
-def admin():
+@app.route('/admin/dashboard')
+def admin_dashboard():
     if not is_admin_logged_in():
         return redirect(url_for('admin_login'))
     search_term = request.args.get('search', '').lower()
+    level_filter = request.args.get('level', 'all')
+    sort_by = request.args.get('sort_by', 'username')
+    sort_order = request.args.get('sort_order', 'asc')
+    
     filtered_members = {}
     for username, data in MEMBERS.items():
-        if search_term in username.lower() or search_term in data.get('email', '').lower():
+        if level_filter == 'all' or data.get('level') == level_filter:
+          if search_term in username.lower() or search_term in data.get('email', '').lower():
             filtered_members[username] = data
+    
+    # Sorting Logic
+    def get_sort_key(item):
+        username, data = item
+        if sort_by == 'username':
+            return username
+        elif sort_by == 'email':
+            return data.get('email', '')
+        elif sort_by == 'level':
+           return data.get('level', '')
+        elif sort_by == 'password':
+            return data.get('password', '')
+        elif sort_by == 'registration_date':
+            return datetime.strptime(data.get('registration_date', '01/01/1900'), '%d/%m/%Y')
+
+    
+    sorted_members = sorted(filtered_members.items(), key=get_sort_key, reverse=(sort_order == 'desc'))
     
     logged_in_users = defaultdict(int)
     for key in session.keys():
         if key != 'admin_logged_in' and key != "_permanent":
           logged_in_users[key] += 1
-  
-    return render_template('admin.html', members=filtered_members, logged_in_users = logged_in_users , search_term = search_term)
+    total_members = len(MEMBERS)
+    return render_template('admin.html', 
+                           members=dict(sorted_members),
+                           logged_in_users = logged_in_users, 
+                           search_term = search_term, 
+                           level_filter = level_filter,
+                           sort_by=sort_by,
+                           sort_order=sort_order,
+                           total_members = total_members
+                           )
 
 @app.route('/admin/delete_member/<username>')
 def delete_member(username):
@@ -779,7 +811,7 @@ def delete_member(username):
     if username in MEMBERS:
         del MEMBERS[username]
         save_members_data(MEMBERS)
-    return redirect(url_for('admin'))
+    return redirect(url_for('admin_dashboard'))
 
 @app.route('/admin/add_member', methods = ['GET', 'POST'])
 def add_member():
@@ -789,7 +821,7 @@ def add_member():
              username = request.form['username']
              password = request.form['password']
              email = request.form['email']
-             level = request.form['level']
+             level = request.form['level'] #getting level from form
              if username in MEMBERS:
                return render_template('add_member.html', error="Ce nom d'utilisateur existe déjà.")
              MEMBERS[username] = {'password': password, 'email': email, 'is_active': True, 'level' : level, 'certificats': {}}
@@ -802,7 +834,7 @@ def add_member():
                         MEMBERS[username]['certificats'][module] = Certificat(module).to_dict()
                         MEMBERS[username][f'qcms_{module}'] = [qcm.to_dict() for qcm in load_qcms(module)]
              save_members_data(MEMBERS)
-             return redirect(url_for('admin'))
+             return redirect(url_for('admin_dashboard'))
         return render_template('add_member.html')
 @app.route('/admin/edit_member/<username>', methods=['GET', 'POST'])
 def edit_member(username):
@@ -814,15 +846,15 @@ def edit_member(username):
     if request.method == 'POST':
         password = request.form.get('password')
         email = request.form.get('email')
-        level = request.form.get('level')
+        level = request.form.get('level') # getting the level
         if password:
            MEMBERS[username]['password'] = password
         if email:
           MEMBERS[username]['email'] = email
-        if level:
+        if level: #updating the level
             MEMBERS[username]['level'] = level
         save_members_data(MEMBERS)
-        return redirect(url_for('admin'))
+        return redirect(url_for('admin_dashboard'))
     return render_template('edit_member.html', member = MEMBERS[username], username=username)
 
 if __name__ == '__main__':
